@@ -1,11 +1,19 @@
-export const getReadings = async (length = 1200) => {
-  const current = Date.now();
+/**
+ * Retrieves a list of readings for a specified number of days.
+ * Generates random readings values for each day.
+ *
+ * @param {number} daysRange - The number of days for which to retrieve readings. Default is 1200 days.
+ * @returns {Array} An array of objects representing readings, each containing a time and value.
+ */
+export const getReadings = async (daysRange = 1200) => {
+  const now = Date.now();
   const hour = 1000 * 60 * 60;
-  return [...new Array(length)].map((_, index) => ({
-    time: current - index * hour,
+  return [...new Array(daysRange)].map((_, dayIndex) => ({
+    time: now - dayIndex * hour,
     value: Math.random() * 0.7 + 0.4,
   }));
 };
+
 
 export const groupByDay = (readings) => {
   const groupedByDay = readings.reduce((curr, { time, value }) => {
